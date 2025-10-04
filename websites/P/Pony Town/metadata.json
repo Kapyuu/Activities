@@ -7,7 +7,7 @@
   },
   "service": "Pony Town",
   "description": {
-    "en": "POJNY TOWN"
+    "en": "Shows if you're ingame or on the homepage and displays when you're desiging a pony and how long you've been doing it for ^^"
   },
   "url": "pony.town",
   "version": "1.0.0",
