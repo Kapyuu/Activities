@@ -5,7 +5,7 @@ const presence = new Presence({
 })
 
 const browsingTimestamp = Math.floor(Date.now() / 1000)
-var editingTime = Math.floor(Date.now() / 1000)
+var editingTime = 0
 var currentState = "home"
 
 enum ActivityAssets { // Other default assets can be found at index.d.ts
@@ -23,7 +23,7 @@ presence.on('UpdateData', async () => {
   presenceData.type = ActivityType.Playing 
 
   if (gameWindow?.hidden) {
-    presenceData.details = "On home page"
+    presenceData.details = "Home page"
     currentState = "home"
   } else {
     presenceData.details = "In Game"
@@ -34,25 +34,31 @@ presence.on('UpdateData', async () => {
   if (currentState === "home") {
     presenceData.state = ""
     if (document.getElementsByClassName("character-tabs")[0]) {
-      presenceData.state = "Editing Character"
+      presenceData.state = "Designing Pony"
       presenceData.smallImageKey = "https://kapyu.neocities.org/otherassets/customizing%20icon.png"
-      editingTime = Math.floor(Date.now() / 1000)
+      if (editingTime === 0) {
+        editingTime = Math.floor(Date.now() / 1000)
+      }
       presenceData.startTimestamp = editingTime
     } else {
       presenceData.state = ""
       presenceData.startTimestamp = browsingTimestamp
+      editingTime = 0
     }
   } else if (currentState === "game") {
     presenceData.state = ""
     if (document.getElementsByTagName("character-preview")[0]) {
-      presenceData.state = "Editing Character"
+      presenceData.state = "Designing Pony"
       presenceData.smallImageKey = "https://kapyu.neocities.org/otherassets/customizing%20icon.png"
-      editingTime = Math.floor(Date.now() / 1000)
+      if (editingTime === 0) {
+        editingTime = Math.floor(Date.now() / 1000)
+      }
       presenceData.startTimestamp = editingTime
     } else {
       presenceData.state = ""
       presenceData.startTimestamp = browsingTimestamp
       presenceData.smallImageKey = "https://kapyu.neocities.org/otherassets/playing%20icon.png"
+      editingTime = 0
     }
   }
   
