@@ -32,7 +32,7 @@ presence.on('UpdateData', async () => {
   }
 
   if (currentState === "home") {
-    presenceData.state = ""
+    delete presenceData.state
     if (document.getElementsByClassName("character-tabs")[0]) {
       presenceData.state = "Designing Pony"
       presenceData.smallImageKey = "https://kapyu.neocities.org/otherassets/customizing%20icon.png"
@@ -41,12 +41,12 @@ presence.on('UpdateData', async () => {
       }
       presenceData.startTimestamp = editingTime
     } else {
-      presenceData.state = ""
+      delete presenceData.state
       presenceData.startTimestamp = browsingTimestamp
       editingTime = 0
     }
   } else if (currentState === "game") {
-    presenceData.state = ""
+    delete presenceData.state
     if (document.getElementsByTagName("character-preview")[0]) {
       presenceData.state = "Designing Pony"
       presenceData.smallImageKey = "https://kapyu.neocities.org/otherassets/customizing%20icon.png"
@@ -55,7 +55,7 @@ presence.on('UpdateData', async () => {
       }
       presenceData.startTimestamp = editingTime
     } else {
-      presenceData.state = ""
+      delete presenceData.state
       presenceData.startTimestamp = browsingTimestamp
       presenceData.smallImageKey = "https://kapyu.neocities.org/otherassets/playing%20icon.png"
       editingTime = 0
