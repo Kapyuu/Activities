@@ -8,6 +8,9 @@ const browsingTimestamp = Math.floor(Date.now() / 1000)
 var editingTime = 0
 var currentState = "home"
 
+var detailsText = "Home Page"
+var activityText = ""
+
 enum ActivityAssets { // Other default assets can be found at index.d.ts
   Logo = 'https://kapyu.neocities.org/otherassets/ponytownimagelarge.jpg',
 }
@@ -19,14 +22,15 @@ presence.on('UpdateData', async () => {
   }
 
   const gameWindow = document.getElementById("app-game")
+  const statusbox = document.getElementsByClassName("status-box")[0]
 
   presenceData.type = ActivityType.Playing 
 
   if (gameWindow?.hidden) {
-    presenceData.details = "Home page"
+    detailsText = "Home page"
     currentState = "home"
   } else {
-    presenceData.details = "In Game"
+    detailsText = "In Game"
     currentState = "game"
     presenceData.smallImageKey = "https://kapyu.neocities.org/otherassets/playing%20icon.png"
   }
@@ -60,7 +64,19 @@ presence.on('UpdateData', async () => {
       presenceData.smallImageKey = "https://kapyu.neocities.org/otherassets/playing%20icon.png"
       editingTime = 0
     }
+
+    if (statusbox) {
+      const currentStatus = statusbox.getElementsByClassName("svg")[0]
+      if (currentStatus) {
+        activityText = "(found status)"
+      } else {
+        activityText = ""
+      }
+    }
+
   }
   
+  presenceData.details = detailsText + " " + activityText
+
   presence.setActivity(presenceData)
 })
