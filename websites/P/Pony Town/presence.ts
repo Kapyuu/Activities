@@ -22,13 +22,13 @@ presence.on('UpdateData', async () => {
   }
 
   const gameWindow = document.getElementById("app-game")
-  const statusbox = document.getElementsByClassName("status-box")[0]
 
   presenceData.type = ActivityType.Playing 
 
   if (gameWindow?.hidden) {
     detailsText = "Home page"
     currentState = "home"
+    activityText = ""
   } else {
     detailsText = "In Game"
     currentState = "game"
@@ -65,13 +65,29 @@ presence.on('UpdateData', async () => {
       editingTime = 0
     }
 
-    if (statusbox) {
-      const currentStatus = statusbox.getElementsByClassName("svg")[0]
-      if (currentStatus) {
-        activityText = "(found status)"
+    if (document.getElementsByTagName("status-box")[0]) {
+      const statusBox = document.getElementsByTagName("status-box")[0]
+      if (statusBox?.getElementsByTagName("svg")[0]) {
+        const statusIcon = statusBox?.getElementsByTagName("svg")[0]
+        var currentStatusIcon = statusIcon?.getAttribute("data-icon")
+        if (currentStatusIcon === "moon") {
+          activityText = "(Away)"
+        } else if (currentStatusIcon === "circle") {
+          activityText = "(Online)"
+        } else if (currentStatusIcon === "do-not-enter") {
+          activityText = "(Busy)"
+        } else if (currentStatusIcon === "comment-question") {
+          activityText = "(Looking For Chat)"
+        } else if (currentStatusIcon === "masks-theater") {
+          activityText = "(Looking For Roleplay)"
+        } else {
+          activityText = ""
+        }
       } else {
         activityText = ""
       }
+    } else {
+      activityText = ""
     }
 
   }
