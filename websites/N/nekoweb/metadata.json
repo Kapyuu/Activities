@@ -7,17 +7,25 @@
   },
   "service": "Nekoweb",
   "description": {
-    "en": "TODO"
+    "en": "Shows current activity on the main Nekoweb pages"
   },
   "url": "nekoweb.org",
   "version": "1.0.0",
-  "logo": "https://i.imgur.com/000000.png",
+  "logo": "https://kapyu.neocities.org/otherassets/nekowebicon.png",
   "thumbnail": "https://kapyu.neocities.org/otherassets/nekowebthumb.png",
-  "color": "#000000",
+  "color": "#00A3FF",
   "category": "socials",
   "tags": [
     "hosting",
     "websites",
     "social"
+  ],
+  "settings": [
+    {
+      "id": "showsite",
+      "title": "Display your Page",
+      "icon": "fa-solid fa-link",
+      "value": true
+    }
   ]
 }
